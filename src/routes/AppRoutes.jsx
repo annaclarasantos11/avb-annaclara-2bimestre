@@ -8,7 +8,8 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/pokemon/:name" element={<Details />} />
+        <Route path="/favoritos" element={<Favorites />} /> {/* nova rota */}
+        <Route path="/" element={<Favoritos />} />
       </Routes>
     </Router>
   );

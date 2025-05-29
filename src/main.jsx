@@ -5,7 +5,9 @@ import App from "./App";
 import { FavoritesProvider } from "./context/FavoritesContext";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <FavoritesProvider>
+  <React.StrictMode>
+   <FavoritesProvider>
     <App />
-  </FavoritesProvider>
+   </FavoritesProvider>
+  </React.StrictMode>
 );
