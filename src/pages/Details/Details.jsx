@@ -19,18 +19,19 @@ function Details() {
 
   const isFavorite = favorites.some((fav) => fav.name === pokemon.name);
 
-  const handleFavoriteClick = () => {
-    if (isFavorite) {
-      removeFromFavorites(pokemon.id);
-    } else {
-      addToFavorites({
-  id: pokemon.id,
-  name: pokemon.name,
-  image: pokemon.sprites.front_default,
-});
-
-    }
+ const handleFavoriteClick = () => {
+  const simplifiedPokemon = {
+    id: pokemon.id,
+    name: pokemon.name,
+    image: pokemon.sprites.front_default,
   };
+
+  if (isFavorite) {
+    removeFromFavorites(pokemon.id);
+  } else {
+    addToFavorites(simplifiedPokemon);
+  }
+};
 
   return (
     <div className="p-6">
