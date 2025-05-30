@@ -23,7 +23,12 @@ function Details() {
     if (isFavorite) {
       removeFromFavorites(pokemon.id);
     } else {
-      addToFavorites(pokemon);
+      addToFavorites({
+  id: pokemon.id,
+  name: pokemon.name,
+  image: pokemon.sprites.front_default,
+});
+
     }
   };
 

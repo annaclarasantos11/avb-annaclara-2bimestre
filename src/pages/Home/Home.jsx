@@ -1,6 +1,13 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Card from "../../components/Card";
+import { Link } from "react-router-dom";
+
+// Dentro do JSX
+<Link to="/favoritos" className="text-blue-500 underline">
+  Ver Favoritos
+</Link>
+
 
 function Home() {
   const [pokemons, setPokemons] = useState([]);
