@@ -1,10 +1,16 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react"; // Importe useEffect também
 import { FavoritesContext } from "../../context/FavoritesContext";
 
 function Favorites() {
-  const { favorites } = useContext(FavoritesContext);
+  const { favorites, loading } = useContext(FavoritesContext);
 
-   if (loading) {
+  // Adicione um useEffect para ver quando este componente renderiza
+  useEffect(() => {
+    console.log("--- Favorites.jsx: Componente renderizado. Favoritos atuais:", favorites);
+    console.log("--- Favorites.jsx: Loading atual:", loading);
+  }, [favorites, loading]); // Depende de favorites e loading para re-logar se eles mudarem
+
+  if (loading) {
     return <p>Carregando favoritos...</p>;
   }
 

@@ -8,9 +8,14 @@ export default function Card({ pokemon, index }) {
 
   const handleFavoriteClick = () => {
     if (isFavorite) {
-      removeFromFavorites(pokemon.id ?? index + 1); // ID fallback caso não venha da API
+      removeFromFavorites(pokemon.name); // ID fallback caso não venha da API
     } else {
-      addToFavorites({ ...pokemon, id: pokemon.id ?? index + 1 });
+      const pokemonToAdd = {
+        id: pokemon.id ?? index + 1, // Mantemos o ID para uso futuro (ex: em Favorites.js)
+        name: pokemon.name,
+        image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id ?? index + 1}.png`
+      };
+      addToFavorites(pokemonToAdd);
     }
   };
 

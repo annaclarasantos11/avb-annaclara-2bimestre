@@ -1,41 +1,40 @@
+// FavoritesContext.jsx
 import { createContext, useState, useEffect } from "react";
 
 export const FavoritesContext = createContext();
 
 export function FavoritesProvider({ children }) {
-  const [favorites, setFavorites] = useState([]);
-  const [loading, setLoading] = useState(true);
 
-  // Carrega favoritos do localStorage ao iniciar
-  useEffect(() => {
-    const storedFavorites = localStorage.getItem("favorites");
-    if (storedFavorites) {
-      setFavorites(JSON.parse(storedFavorites));
+  const [favorites, setFavorites] = useState(() => {
+    try {
+      const storedFavorites = localStorage.getItem("favorites");
+      return storedFavorites ? JSON.parse(storedFavorites) : [];
+    } catch (error) {
+      return [];
     }
-    setLoading(false);
-  }, []);
+  });
 
-  // Salva favoritos no localStorage sempre que mudar
+  const [loading, setLoading] = useState(false); // Mantém como false
+
   useEffect(() => {
-    console.log("Salvando favoritos no localStorage:", favorites);
     localStorage.setItem("favorites", JSON.stringify(favorites));
-  }, [favorites, loading]);
+  }, [favorites]);
 
-  const addToFavorites = (item) => {
-    const alreadyExists = favorites.some((fav) => fav.id === item.id);
-    if (!alreadyExists) {
-      setFavorites((prev) => [...prev, item]);
+  const addToFavorites = (pokemonToAdd) => {
+    if (!favorites.some(fav => fav.name === pokemonToAdd.name)) {
+      setFavorites((prevFavorites) => [...prevFavorites, pokemonToAdd]);
     }
   };
 
-  const removeFromFavorites = (id) => {
-    setFavorites((prev) => prev.filter((item) => item.id !== id));
+  const removeFromFavorites = (pokemonName) => {
+    setFavorites((prevFavorites) =>
+      prevFavorites.filter((fav) => fav.name !== pokemonName)
+    );
   };
 
   return (
-    <FavoritesContext.Provider value={{ favorites, addToFavorites, removeFromFavorites }}>
+    <FavoritesContext.Provider value={{ favorites, loading, addToFavorites, removeFromFavorites }}>
       {children}
     </FavoritesContext.Provider>
   );
 }
-

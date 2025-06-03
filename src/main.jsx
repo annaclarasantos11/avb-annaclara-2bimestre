@@ -6,11 +6,11 @@ import { FavoritesProvider } from './context/FavoritesContext';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    {/* <FavoritesProvider>
-      <BrowserRouter>  */}
+    <FavoritesProvider>
+      <BrowserRouter> 
         <App />
-      {/* </BrowserRouter>
-    </FavoritesProvider> */}
+      </BrowserRouter>
+    </FavoritesProvider>
   </React.StrictMode>
 );
 
